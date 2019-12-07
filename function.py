@@ -74,7 +74,6 @@ def caller(input):
         nodePL = int(nodes.index(locPL) + 1)
         loadPL = -1 * float(each['load'])
         ss.point_load(nodePL, Fx=0, Fy = loadPL)
-        print("PL")
         print(nodePL)
         print(loadPL)
 
