@@ -20,7 +20,10 @@ def caller(input):
         variables.append(float(each))
 
     for each in input['Fixed']:
-        variables.append(float(each))
+        if each == 'Left':
+            variables.append(float(0))
+        else:
+            variables.append(float(input['BeamLen']))
 
     for each in input['PL']:
         variables.append(float(each['location']))
@@ -52,7 +55,10 @@ def caller(input):
         print(nodePin)
 
     for each in input['Fixed']:
-        nodeFixed = int(nodes.index(float(each)) + 1)
+        if each == 'Left':
+            nodeFixed = int(nodes.index(float(0)) + 1)
+        else:
+            nodeFixed = int(nodes.index(float(input['BeamLen'])) + 1)
         ss.add_support_fixed([nodeFixed])
         print("supportfix")
         print(nodeFixed)
