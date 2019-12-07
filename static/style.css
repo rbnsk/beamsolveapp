@@ -1,0 +1,43 @@
+.ele-modal-wrap{
+    background: white;
+    position: fixed;
+    top: 25%;
+    height: 300px;
+    -webkit-border-radius: 20px !important;
+    -moz-border-radius: 20px !important;
+    border-radius: 13px !important;  
+}
+
+.pl-modal-wrap{
+    background: white;
+    position: fixed;
+    top: 25%;
+    height: 270px;
+    -webkit-border-radius: 20px !important;
+    -moz-border-radius: 20px !important;
+    border-radius: 13px !important; 
+}
+
+.udl-modal-wrap{
+    background: white;
+    position: fixed;
+    top: 25%;
+    height: 330px;
+    -webkit-border-radius: 20px !important;
+    -moz-border-radius: 20px !important;
+    border-radius: 13px !important; 
+}
+
+.tab { 
+    display: inline-block; 
+    width: 100px; 
+}
+
+.box {
+    box-shadow: 20px
+}
+
+.canvas {
+    margin: 0;
+    padding: 0;
+}

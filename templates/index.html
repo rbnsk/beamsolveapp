@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Beam Solve</title>
+    <link rel="stylesheet" type="text/css" href="../static/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+</head>
+<body>
+
+    <div class="container"> 
+    <nav class="navbar is-spaced" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+            <a class="navbar-item" href="https://bulma.io">
+                <img src="../static/images/beamsolve.png">
+            </a>
+        </div>
+        <div class="navbar-end">
+            <a class="navbar-item" href="https://google.com">About</a>
+            <a class="navbar-item" href="https://google.com">Videos</a>
+            <a class="navbar-item" href="https://google.com">Tutorial</a>
+        </div>
+    </nav>
+    </div>
+
+    <br>
+    <br>
+
+    <div class="container">
+    <section class="section is-small">
+    
+        <h2 id='caption' class="subtitle is-4 has-text-centered">
+            🚧 Input below to create Beam 🚧
+        </h2>
+
+        <canvas id='canvas' style='display:none;'>
+        </canvas>
+    
+      </section>
+    </div>
+
+    <div class="container">
+    <section class="section">
+        
+    <div class="tile is-ancestor ">
+        <div class="tile is-parent">
+            <article class="tile is-child box">
+
+                <p class="title">Beam Data</p>
+                <p class="subtitle">Input the beam data</p>
+
+                <form id="beamLen">
+                Beam Length: <input type="text" id="inputBeamLen">
+                <a class="button is-primary is-rounded is-centered is-small has-text-weight-semibold" id="addBeamLen">Add</a>
+                
+            </article>
+        </div>
+
+        <div class="tile is-parent">
+            <article class="tile is-child box">
+        
+                <p class="title">Supports</p>
+                <p class="subtitle">Input the type of support & location</p>
+        
+                <div class="field is-grouped">
+                    <p class="control">
+                        <a class="button is-primary is-rounded is-small has-text-weight-semibold" id="addPin">Add Pin</a>
+                    </p>
+                    <p class="control">
+                        <a class="button is-primary is-rounded is-small has-text-weight-semibold" id="addRoller">Add Roller</a>
+                    </p>
+                    <p class="control">
+                        <a class="button is-primary is-rounded is-small has-text-weight-semibold" id="addFixed">Add Fixed</a>
+                    </p>   
+                </div>
+
+                <div class="field is-grouped">
+                    <p class="control">
+                        <div id="containerPin"></div>
+                    </p>
+                </div>
+                <div class="field is-grouped">
+                    <p class="control">
+                        <div id="containerRoller"></div>
+                    </p>
+                </div>
+                <div class="field is-grouped">
+                    <p class="control">
+                        <div id="containerFixed"></div>
+                    </p>
+
+            </article>
+        </div>
+
+        <div class="tile is-parent">
+            <article class="tile is-child box">
+        
+                <p class="title">Loads</p>
+                <p class="subtitle">Input the type of load & location</p>
+            
+                <div class="field is-grouped">
+                    <p class="control">
+                        <a class="button is-primary is-rounded is-small has-text-weight-semibold" id="addPL">Add Point Load</a>
+                    </p>
+                    <p class="control">
+                        <a class="button is-primary is-rounded is-small has-text-weight-semibold" id="addUDL">Add UDL</a>
+                    </p>
+                    <p class="control">
+                        <a class="button is-primary is-rounded is-small has-text-weight-semibold" id="addMom">Add Moment</a>
+                    </p>   
+                </div>
+
+                <div class="field is-grouped">
+                    <p class="control">
+                        <div id="containerPL"></div>
+                    </p>
+                </div>
+                <div class="field is-grouped">
+                    <p class="control">
+                        <div id="containerUDL"></div>
+                    </p>
+                </div>
+                <div class="field is-grouped">
+                    <p class="control">
+                    <div id="containerMom"></div>
+                    </p>
+                </div>
+        
+            </article>
+        </div>
+
+        </div>
+    </section>
+    </div>
+
+        <div class="modal" id="modalPL">
+            <div class="modal-background"></div>
+                <div class="modal-content">
+                    <div class="section pl-modal-wrap">
+                        <h1 class="title"> Add Point Load </h1>
+                        <h5 class="title is-5">Load Location:
+                            <input type="text" id="PLlocation">     
+                        </h5>
+                        <h5 class="title is-5">Load Magnitude:
+                            <input type="text" id="PLmag">
+                        </h5> 
+
+                        <button type="button" class="button is-primary is-centered" id="addPLModal">Add</button>
+                        <button type="button" class="button is-light is-centered" id="cancel" onclick= "modalCancel('PL')">Cancel</button>
+                        <button type="button" class="modal-close is-large" aria-label="close" onclick= "modalCancel('PL')"></button>
+                    </div>
+                </div>
+            </div>
+
+        <div class="modal" id="modalUDL">
+            <div class="modal-background"></div>
+                <div class="modal-content">
+                    <div class="section udl-modal-wrap">
+                        <h1 class="title"> Add a Uniformly Distributed Load </h1>
+                        <h5 class="title is-5">Load Start:
+                        <input type="text" id="UDLstart">     
+                        </h5>
+                        <h5 class="title is-5">Load End:
+                            <input type="text" id="UDLend">     
+                        </h5>
+                        <h5 class="title is-5">Load Magnitude:
+                        <input type="text" id="UDLmag">
+                        </h5> 
+    
+                        <button type="button" class="button is-primary is-centered" id="addUDLModal">Add</button>
+                        <button type="button" class="button is-light is-centered" id="cancel" onclick= "modalCancel('UDL')">Cancel</button>
+                        <button type="button" class="modal-close is-large" aria-label="close" onclick= "modalCancel('UDL')"></button>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal" id="modalMom">
+            <div class="modal-background"></div>
+                <div class="modal-content">
+                    <div class="section pl-modal-wrap">
+                        <h1 class="title"> Add Moment </h1>
+                        <h5 class="title is-5">Moment Location:
+                                <input type="text" id="Momlocation">     
+                        </h5>
+                        <h5 class="title is-5">Moment Magnitude:
+                                <input type="text" id="Mommag">
+                        </h5> 
+    
+                        <button type="button" class="button is-primary is-centered" id="addMomModal">Add</button>
+                        <button type="button" class="button is-light is-centered" id="cancel" onclick= "modalCancel('Mom')">Cancel</button>
+                        <button type="button" class="modal-close is-large" aria-label="close" onclick= "modalCancel('Mom')"></button>
+                </div>
+            </div>
+        </div>
+
+    <div class="modal" id="modalPin">
+        <div class="modal-background"></div>
+            <div class="modal-content">
+                <div class="section pl-modal-wrap">
+                    <h1 class="title"> Add Pin Support </h1>
+                        <h5 class="title is-5">Location:
+                                <input type="text" id="pinLocation">     
+                        </h5>
+                        <br>
+
+    
+                    <button type="button" class="button is-primary is-centered" id="addPinModal">Add</button>
+                    <button type="button" class="button is-light is-centered" id="cancel" onclick= "modalCancel('Pin')">Cancel</button>
+                    <button type="button" class="modal-close is-large" aria-label="close" onclick= "modalCancel('Pin')"></button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="modalRoller">
+            <div class="modal-background"></div>
+                <div class="modal-content">
+                    <div class="section pl-modal-wrap">
+                        <h1 class="title"> Add Roller Support </h1>
+                            <h5 class="title is-5">Location:
+                                    <input type="text" id="rollerLocation">     
+                            </h5>
+    
+        
+                        <button type="button" class="button is-primary is-centered" id="addRollerModal">Add</button>
+                        <button type="button" class="button is-light is-centered" id="cancel" onclick= "modalCancel('Roller')">Cancel</button>
+                        <button type="button" class="modal-close is-large" aria-label="close" onclick= "modalCancel('Roller')"></button>
+                </div>
+            </div>
+    </div>
+
+    <div class="modal" id="modalFixed">
+        <div class="modal-background"></div>
+            <div class="modal-content">
+                <div class="section pl-modal-wrap">
+                    <h1 class="title"> Add Fixed Support </h1>
+                    
+
+                        <label class="checkbox">
+                            <input type="checkbox" id="FixLeft">
+                            On the Left
+                            <br>
+                            <br>
+                            <input type="checkbox" id="FixRight">
+                            On the Right
+                          </label>
+                          <br>
+                          <br>
+                          
+                        <button type="button" class="button is-primary" id="addFixedModal">Add</button>
+                        <button type="button" class="button is-light" id="cancel" onclick= "modalCancel('Fixed')">Cancel</button>
+                        <button type="button" class="modal-close is-large" aria-label="close" onclick= "modalCancel('Fixed')"></button>
+                </div>
+            </div>
+        </div>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <nav class="level">
+            <div class="level-item has-text-centered">
+                <button type="button" class="button is-rounded is-danger has-text-weight-semibold" id="generate">Generate</button>
+            </div>
+    </nav>
+
+    
+    <div class="container is-hidden" id="graphs">
+    <section class="section">
+        <div class="tile is-ancestor ">
+            <div class="tile is-parent">
+                <article class="tile is-child box">
+                        <p class="title">Bending Moment</p>
+                        <div id="bmGraph"></div>
+                </article>
+            </div>
+            <div class="tile is-parent">
+                <article class="tile is-child box">
+                        <p class="title">Shear Force</p>
+                        <div id="shearGraph"></div>
+                </article>
+            </div>
+        </div>
+     </section>
+     </div>
+    
+    <br>
+    <br>         
+
+    </div>
+
+    <footer class="footer">
+            <div class="content has-text-centered">
+              <p>
+                <strong>BeamSolve</strong> by Ruban</a>. The source code is licensed
+                <a href="http://opensource.org/licenses/mit-license.php">MIT</a>.
+              </p>
+            </div>
+          </footer>
+
+
+<script src="../static/script.js"></script>
+<script src="https://unpkg.com/konva@4.0.18/konva.min.js"></script>
+
+
+</body>
+</html>
