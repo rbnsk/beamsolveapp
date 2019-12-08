@@ -103,9 +103,58 @@ const renderCanvas = function(){
 
     //Moments
     inputs.Mom.forEach(function(value) {
+        startingX = beamX + (BeamSegment * value.location)
+
+        ctx.font = "15px Arial";
+        ctx.fillStyle = 'black'
+        ctx.fillText(value.load + 'Nm', startingX - 20, 30 );
         ctx.beginPath();
-        ctx.arc(5, 5, 5, 0, Math.PI, false);
-        ctx.closePath();
+        ctx.strokeStyle = "#00C7A9"
+        ctx.lineWidth = 5
+        ctx.arc(startingX, beamY - 5, 25, (Math.PI * 1.5) , Math.PI, false)
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.fillStyle = "#00C7A9"
+        ctx.moveTo(startingX - 25, beamY - 20); // pick up "pen," reposition at 500 (horiz), 0 (vert)
+        ctx.lineTo(startingX - 35, beamY); // draw straight down by 200px (200 + 200)
+        ctx.lineTo(startingX - 15, beamY)
+        ctx.closePath(); // connect end to start
+        ctx.fill();
+    });
+
+    //UDL
+    inputs.UDL.forEach(function(value) {
+        startingX = beamX + (BeamSegment * value.start)
+        endingX = beamX + (BeamSegment * value.end)
+        width = endingX - startingX
+
+        if (value.load > 0) {
+            ctx.beginPath();
+            drawArrow2(startingX, 40, startingX, beamY + BeamHeight - 17);
+            ctx.stroke();
+            
+            ctx.beginPath();
+            drawArrow2(endingX, 40, endingX, beamY + BeamHeight - 17);
+            ctx.stroke(); 
+        }
+
+        else if (value.load < 0){
+            ctx.beginPath();
+            drawArrow2(startingX, beamY + BeamHeight - 15, startingX, 22);
+            ctx.stroke();
+
+            ctx.beginPath();
+            drawArrow2(endingX, 40, endingX, beamY + BeamHeight - 17);
+            ctx.stroke(); 
+        }
+
+        ctx.font = "15px Arial";
+        ctx.fillStyle = 'black'
+        ctx.fillText(value.load + 'N/m', startingX + width/2 - 15, 30 );
+        ctx.fillStyle = "#89dfc4"
+        ctx.fillRect(startingX,40,width,25)
+        
     });
 
 }
@@ -143,6 +192,42 @@ function drawArrow(fromx, fromy, tox, toy){
     ctx.lineWidth = 2;
     ctx.stroke();
     ctx.fillStyle = "#00C7A9";
+    ctx.fill();
+}
+
+function drawArrow2(fromx, fromy, tox, toy){
+    //variables to be used when creating the arrow
+    var c = document.getElementById("canvas");
+    var ctx = c.getContext("2d");
+    var headlen = 10;
+
+    var angle = Math.atan2(toy-fromy,tox-fromx);
+
+    //starting path of the arrow from the start square to the end square and drawing the stroke
+    ctx.beginPath();
+    ctx.moveTo(fromx, fromy);
+    ctx.lineTo(tox, toy);
+    ctx.strokeStyle = "#89dfc4";
+    ctx.lineWidth = 4;
+    ctx.stroke();
+
+    //starting a new path from the head of the arrow to one of the sides of the point
+    ctx.beginPath();
+    ctx.moveTo(tox, toy);
+    ctx.lineTo(tox-headlen*Math.cos(angle-Math.PI/7),toy-headlen*Math.sin(angle-Math.PI/7));
+
+    //path from the side point of the arrow, to the other side point
+    ctx.lineTo(tox-headlen*Math.cos(angle+Math.PI/7),toy-headlen*Math.sin(angle+Math.PI/7));
+
+    //path from the side point back to the tip of the arrow, and then again to the opposite side point
+    ctx.lineTo(tox, toy);
+    ctx.lineTo(tox-headlen*Math.cos(angle-Math.PI/7),toy-headlen*Math.sin(angle-Math.PI/7));
+
+    //draws the paths created above
+    ctx.strokeStyle = "#89dfc4";
+    ctx.lineWidth = 2;
+    ctx.stroke();
+    ctx.fillStyle = "#89dfc4";
     ctx.fill();
 }
 
