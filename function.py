@@ -1,11 +1,11 @@
-from BeamCalc import *
+from beamcalc import *
 import matplotlib
-matplotlib.use('agg')
 import matplotlib.pyplot as plt
 import os
 import io
 import base64
 
+matplotlib.use('agg')
 
 def caller(input):
     

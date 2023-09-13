@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, jsonify
 import json
 from function import *
-from BeamCalc import *
+from beamcalc import *
 
 app= Flask(__name__)
 
@@ -21,6 +21,3 @@ def index():
    
 if __name__ == '__main__':
     app.run(debug = True)
-
-
- 

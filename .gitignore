@@ -1,0 +1,20 @@
+# DS_Store
+DS_Store
+.DS_Store
+*.DS_Store
+
+# Environments
+.venv/
+.env
+.venv
+env/
+venv/
+.ipynb_checkpoints
+
+# IDE
+.idea/
+workspace.xml
+
+# Byte-compiled / optimized / DLL files
+**/__pycache__
+*.py[cod]

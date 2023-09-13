@@ -8,8 +8,7 @@ inputs = {
     Fixed: []
 }
 
-//Canvas
-
+// Canvas
 var canvas = document.getElementById('canvas');
 var ctx = canvas.getContext('2d')
 
@@ -20,7 +19,7 @@ const renderCanvas = function(){
     canvas.width = canvas.scrollWidth
     canvas.height = 200
 
-    //Beam
+    // Beam
     BeamLength = 800
     BeamHeight = 5
 
@@ -30,8 +29,7 @@ const renderCanvas = function(){
     ctx.fillStyle = "#6D6D6D"
     ctx.fillRect(beamX,beamY - 10,BeamLength,BeamHeight)
 
-    //Length
-
+    // Length
     ctx.fillRect(beamX,beamY + 50,BeamLength,2)
     ctx.fillRect(beamX,beamY + 45,2,13)
     ctx.fillRect(beamX + BeamLength,beamY + 45,2,13)
@@ -39,7 +37,7 @@ const renderCanvas = function(){
     ctx.font = "15px Arial";
     ctx.fillText(inputs.BeamLen + 'm', beamX + (BeamLength/2 - 5), beamY + 70);
 
-    //Pin Support
+    // Pin Support
     inputs.Pin.forEach(function(value) {
         
         ctx.beginPath();
@@ -53,7 +51,7 @@ const renderCanvas = function(){
         ctx.fill();
     });
 
-    //Roller Support
+    // Roller Support
     inputs.Roller.forEach(function(value) {
         
         ctx.beginPath();
@@ -64,7 +62,7 @@ const renderCanvas = function(){
         ctx.fill();
     });
 
-    //Fixed Support
+    // Fixed Support
     inputs.Fixed.forEach(function(value) {
         
         if (value == "Right"){
@@ -79,7 +77,7 @@ const renderCanvas = function(){
 
     });
 
-    //ConcLoad
+    // ConcLoad
     inputs.PL.forEach(function(value) {
         startingX = beamX + (BeamSegment * value.location)
 
@@ -101,7 +99,7 @@ const renderCanvas = function(){
         
     });
 
-    //Moments
+    // Moments
     inputs.Mom.forEach(function(value) {
         startingX = beamX + (BeamSegment * value.location)
 
@@ -123,7 +121,7 @@ const renderCanvas = function(){
         ctx.fill();
     });
 
-    //UDL
+    // UDL
     inputs.UDL.forEach(function(value) {
         startingX = beamX + (BeamSegment * value.start)
         endingX = beamX + (BeamSegment * value.end)
@@ -160,14 +158,14 @@ const renderCanvas = function(){
 }
 
 function drawArrow(fromx, fromy, tox, toy){
-    //variables to be used when creating the arrow
+    // variables to be used when creating the arrow
     var c = document.getElementById("canvas");
     var ctx = c.getContext("2d");
     var headlen = 10;
 
     var angle = Math.atan2(toy-fromy,tox-fromx);
 
-    //starting path of the arrow from the start square to the end square and drawing the stroke
+    // starting path of the arrow from the start square to the end square and drawing the stroke
     ctx.beginPath();
     ctx.moveTo(fromx, fromy);
     ctx.lineTo(tox, toy);
@@ -175,19 +173,19 @@ function drawArrow(fromx, fromy, tox, toy){
     ctx.lineWidth = 4;
     ctx.stroke();
 
-    //starting a new path from the head of the arrow to one of the sides of the point
+    // starting a new path from the head of the arrow to one of the sides of the point
     ctx.beginPath();
     ctx.moveTo(tox, toy);
     ctx.lineTo(tox-headlen*Math.cos(angle-Math.PI/7),toy-headlen*Math.sin(angle-Math.PI/7));
 
-    //path from the side point of the arrow, to the other side point
+    // path from the side point of the arrow, to the other side point
     ctx.lineTo(tox-headlen*Math.cos(angle+Math.PI/7),toy-headlen*Math.sin(angle+Math.PI/7));
 
-    //path from the side point back to the tip of the arrow, and then again to the opposite side point
+    // path from the side point back to the tip of the arrow, and then again to the opposite side point
     ctx.lineTo(tox, toy);
     ctx.lineTo(tox-headlen*Math.cos(angle-Math.PI/7),toy-headlen*Math.sin(angle-Math.PI/7));
 
-    //draws the paths created above
+    // draws the paths created above
     ctx.strokeStyle = "#00C7A9";
     ctx.lineWidth = 2;
     ctx.stroke();
@@ -196,14 +194,14 @@ function drawArrow(fromx, fromy, tox, toy){
 }
 
 function drawArrow2(fromx, fromy, tox, toy){
-    //variables to be used when creating the arrow
+    // variables to be used when creating the arrow
     var c = document.getElementById("canvas");
     var ctx = c.getContext("2d");
     var headlen = 10;
 
     var angle = Math.atan2(toy-fromy,tox-fromx);
 
-    //starting path of the arrow from the start square to the end square and drawing the stroke
+    // starting path of the arrow from the start square to the end square and drawing the stroke
     ctx.beginPath();
     ctx.moveTo(fromx, fromy);
     ctx.lineTo(tox, toy);
@@ -211,19 +209,19 @@ function drawArrow2(fromx, fromy, tox, toy){
     ctx.lineWidth = 4;
     ctx.stroke();
 
-    //starting a new path from the head of the arrow to one of the sides of the point
+    // starting a new path from the head of the arrow to one of the sides of the point
     ctx.beginPath();
     ctx.moveTo(tox, toy);
     ctx.lineTo(tox-headlen*Math.cos(angle-Math.PI/7),toy-headlen*Math.sin(angle-Math.PI/7));
 
-    //path from the side point of the arrow, to the other side point
+    // path from the side point of the arrow, to the other side point
     ctx.lineTo(tox-headlen*Math.cos(angle+Math.PI/7),toy-headlen*Math.sin(angle+Math.PI/7));
 
-    //path from the side point back to the tip of the arrow, and then again to the opposite side point
+    // path from the side point back to the tip of the arrow, and then again to the opposite side point
     ctx.lineTo(tox, toy);
     ctx.lineTo(tox-headlen*Math.cos(angle-Math.PI/7),toy-headlen*Math.sin(angle-Math.PI/7));
 
-    //draws the paths created above
+    // draws the paths created above
     ctx.strokeStyle = "#89dfc4";
     ctx.lineWidth = 2;
     ctx.stroke();
@@ -231,19 +229,19 @@ function drawArrow2(fromx, fromy, tox, toy){
     ctx.fill();
 }
 
-//Display Model
+// Display Model
 const modalOpen = function(type){
     var modal = document.getElementById('modal' + type);
     modal.style.display = 'block'
 }
 
-//Close Modal
+// Close Modal
 const modalCancel = function(type){
     var modal = document.getElementById('modal' + type);
     modal.style.display = 'none'
 }
 
-//RenderPills
+// RenderPills
 const renderPills = function(type){
     var container = document.getElementById("container" + type);
     container.innerHTML = "";
@@ -346,9 +344,9 @@ document.querySelector('#addBeamLen').addEventListener('click',function() {
 })
 
 
-//Forces
+// Forces
 
-//Point Load 
+// Point Load 
 document.querySelector('#addPL').addEventListener('click',function() {
     modalOpen('PL')
 })
@@ -367,8 +365,7 @@ document.querySelector('#addPLModal').addEventListener('click',function(e) {
 })
 
 
-//UDL
-
+// UDL
 document.querySelector('#addUDL').addEventListener('click',function() {
     modalOpen('UDL')
 })
@@ -389,8 +386,7 @@ document.querySelector('#addUDLModal').addEventListener('click',function(e) {
 })
 
 
-//Moments
-
+// Moments
 document.querySelector('#addMom').addEventListener('click',function() {
     modalOpen('Mom')
 })
@@ -408,10 +404,9 @@ document.querySelector('#addMomModal').addEventListener('click',function(e) {
    modalCancel('Mom')
 })
 
-//Support
+// Support
 
-//Pin
-
+// Pin
 document.querySelector('#addPin').addEventListener('click',function() {
     modalOpen('Pin')
 })
@@ -424,8 +419,7 @@ document.querySelector('#addPinModal').addEventListener('click',function(e) {
     modalCancel('Pin')
 })
 
-//Roller
-
+// Roller
 document.querySelector('#addRoller').addEventListener('click',function() {
     modalOpen('Roller')
 })
@@ -438,8 +432,7 @@ document.querySelector('#addRollerModal').addEventListener('click',function(e) {
     modalCancel('Roller')
 })
 
-//Fixed
-
+// Fixed
 document.querySelector('#addFixed').addEventListener('click',function() {
     modalOpen('Fixed')
 })
@@ -464,8 +457,7 @@ document.querySelector('#addFixedModal').addEventListener('click',function(e) {
     console.log(inputs)
 })
 
-//Generate
-
+// Generate
 document.querySelector('#generate').addEventListener('click',function() {
 
     var json_inputs = JSON.stringify(inputs);

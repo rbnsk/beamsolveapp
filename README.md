@@ -1,4 +1,4 @@
-# beamsolve
+# BeamSolve
 
 https://beamsolve.herokuapp.com/
 
