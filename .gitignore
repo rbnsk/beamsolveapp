@@ -4,11 +4,7 @@ DS_Store
 *.DS_Store
 
 # Environments
-.venv/
-.env
-.venv
-env/
-venv/
+myenv/
 .ipynb_checkpoints
 
 # IDE

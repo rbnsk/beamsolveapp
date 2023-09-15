@@ -3,21 +3,29 @@ import json
 from function import *
 from beamcalc import *
 
-app= Flask(__name__)
+app = Flask(__name__)
 
-
+# prevent caching
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
+# auto reload templates
 app.config['TEMPLATES_AUTO_RELOAD'] = True
 
-@app.route('/',methods =['GET','POST'])
+@app.route('/', methods=['GET', 'POST'])
 def index():
-    req = json.loads(json.dumps(request.get_json()))
 
     if request.method == 'POST':
-        result = caller(req)
-        return jsonify(result)
+        req = json.loads(json.dumps(request.get_json()))  
+        print(req)
 
-    return render_template('index.html')
-   
+        # process JSON request
+        req_data = request.get_json()
+        print(req_data)
+        result = caller(req_data)  
+        return jsonify(result), 201
+
+    # render HTML for GET request
+    return render_template('index.html') 
+
 if __name__ == '__main__':
     app.run(debug = True)
+    # app.run()
