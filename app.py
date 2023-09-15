@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, jsonify
 import json
 from function import *
-from beamcalc import *
+from elements import *
 
 app = Flask(__name__)
 
@@ -13,14 +13,10 @@ app.config['TEMPLATES_AUTO_RELOAD'] = True
 @app.route('/', methods=['GET', 'POST'])
 def index():
 
+    # process JSON request
     if request.method == 'POST':
-        req = json.loads(json.dumps(request.get_json()))  
-        print(req)
-
-        # process JSON request
         req_data = request.get_json()
-        print(req_data)
-        result = caller(req_data)  
+        result = generate_graphs(req_data)  
         return jsonify(result), 201
 
     # render HTML for GET request
