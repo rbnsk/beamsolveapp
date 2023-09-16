@@ -50,8 +50,6 @@ def generate_graphs(input):
     for each in input['Pin']:
         nodePin = int(nodes.index(float(each)) + 1)
         ss.add_support_hinged([nodePin])
-        print("hing")
-        print(nodePin)
 
     for each in input['Fixed']:
         if each == 'Left':
@@ -59,30 +57,22 @@ def generate_graphs(input):
         else:
             nodeFixed = int(nodes.index(float(input['BeamLen'])) + 1)
         ss.add_support_fixed([nodeFixed])
-        print("supportfix")
-        print(nodeFixed)
 
     for each in input['Roller']:
         nodeRoller = int(nodes.index(float(each)) + 1)
         ss.add_support_roll(nodeRoller, direction='x')
-        print("supportRoller")
-        print(nodeRoller)
 
     for each in input['PL']:
         locPL = float(each['location'])
         nodePL = int(nodes.index(locPL) + 1)
         loadPL = -1 * float(each['load'])
         ss.point_load(nodePL, Fx=0, Fy = loadPL)
-        print(nodePL)
-        print(loadPL)
 
     for each in input['Mom']:
         locMom = float(each['location'])
         nodeMom = int(nodes.index(locMom) + 1)
         loadMom = float(each['load'])
         ss.moment_load(nodeMom, Ty= loadMom)
-        print("Mom")
-        print(nodeMom)
 
     for each in input['UDL']:
         startUDL = float(each['start'])
@@ -91,7 +81,6 @@ def generate_graphs(input):
         nodeEnd = int(nodes.index(endUDL) + 1)
         for i in range(nodeStart, nodeEnd):
             ss.q_load(-1 * float(each['load']),[i])
-            print("UDL")
     
     ss.solve()
 
