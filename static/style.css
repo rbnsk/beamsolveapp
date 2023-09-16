@@ -1,5 +1,12 @@
+html {
+    font-family: ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,
+    Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji;
+    font-size: 1.05rem;
+    background-color: rgb(252 249 244);
+}
+
 .ele-modal-wrap{
-    background: white;
+    background-color: white;
     position: fixed;
     top: 25%;
     height: 300px;
@@ -9,7 +16,7 @@
 }
 
 .pl-modal-wrap{
-    background: white;
+    background-color: white;
     position: fixed;
     top: 25%;
     height: 270px;
@@ -19,7 +26,7 @@
 }
 
 .udl-modal-wrap{
-    background: white;
+    background-color: white;
     position: fixed;
     top: 25%;
     height: 330px;
@@ -40,4 +47,16 @@
 .canvas {
     margin: 0;
     padding: 0;
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 60px;   /* Height of the footer */
+ }
+
+ @media (max-width: 750px) { 
+    html {font-size: 0.90rem;}
+    footer {position: relative;} 
 }
